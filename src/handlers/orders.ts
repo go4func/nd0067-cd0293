@@ -43,6 +43,7 @@ const updateOrder = async (req: Request, res: Response) => {
   try {
     const order: Order = await store.update({
       id: id,
+      user_id: authUser.id,
       product_id: product_id,
       quantity: quantity,
       status: status,
