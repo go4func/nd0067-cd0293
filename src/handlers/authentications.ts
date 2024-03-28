@@ -11,7 +11,7 @@ const store = new UserStore();
 const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
   if (!id || !password) {
-    res.status(400).json(`invalid request body.`);
+    res.status(400).json(`invalid request body`);
     return;
   }
 
@@ -42,7 +42,7 @@ const login = async (req: Request, res: Response) => {
     });
   } catch (err) {
     console.error(`login got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
@@ -60,7 +60,7 @@ const checkToken = (req: Request, res: Response, next: NextFunction) => {
     );
     next();
   } catch (err) {
-    res.status(401).json('invalid token.');
+    res.status(401).json('invalid token');
   }
   return;
 };

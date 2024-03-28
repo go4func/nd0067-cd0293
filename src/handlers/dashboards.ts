@@ -11,7 +11,7 @@ const fiveMostPopular = async (req: Request, res: Response) => {
     res.status(200).json(products);
   } catch (err) {
     console.error(`get 5 most popular product got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 

@@ -11,7 +11,7 @@ const store = new UserStore();
 const create = async (req: Request, res: Response) => {
   const { first_name, last_name, password } = req.body;
   if (!first_name || !last_name || !password) {
-    res.status(400).json(`invalid request body.`);
+    res.status(400).json(`invalid request body`);
     return;
   }
 
@@ -29,7 +29,7 @@ const create = async (req: Request, res: Response) => {
     res.status(200).json(user);
   } catch (err) {
     console.error(`create user got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
@@ -39,7 +39,7 @@ const index = async (req: Request, res: Response) => {
     res.status(200).json(users);
   } catch (err) {
     console.error(`index user got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
@@ -48,21 +48,21 @@ const show = async (req: Request, res: Response) => {
   const authUser = req.body.auth.user;
   try {
     if (authUser.id != parseInt(id)) {
-      res.status(403).json('permission denied.');
+      res.status(403).json('permission denied');
       return;
     }
     const user: User = await store.show(parseInt(id));
     res.status(200).json(user);
   } catch (err) {
     console.error(`show user got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
 const routes = (app: express.Application) => {
+  app.post('/users', create);
   app.get('/users', auth.checkToken, index);
   app.get('/users/:id', auth.checkToken, show);
-  app.post('/users', create);
 };
 
 export default {

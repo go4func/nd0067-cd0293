@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import auth from './handlers/authentications';
 import dashboards from './handlers/dashboards';
 
-const app = express();
+export const app = express();
 const port = 3000;
 
 app.get('/', (res: Request, resp: Response) => {

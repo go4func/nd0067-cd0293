@@ -10,7 +10,7 @@ const createOrder = async (req: Request, res: Response) => {
   const authUser = req.body.auth.user;
   const { product_id, quantity } = req.body;
   if (!product_id || !quantity) {
-    res.status(400).json(`invalid request body.`);
+    res.status(400).json(`invalid request body`);
     return;
   }
 
@@ -24,7 +24,7 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(200).json(order);
   } catch (err) {
     console.error(`create order got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
@@ -35,7 +35,7 @@ const activeOrders = async (req: Request, res: Response) => {
     res.status(200).json(orders);
   } catch (err) {
     console.error(`get active order got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
@@ -46,7 +46,7 @@ const completeOrders = async (req: Request, res: Response) => {
     res.status(200).json(orders);
   } catch (err) {
     console.error(`get active order got error: ${err}`);
-    res.status(500).json(`internal server error.`);
+    res.status(500).json(`internal server error`);
   }
 };
 
