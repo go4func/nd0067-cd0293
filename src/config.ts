@@ -6,7 +6,10 @@ const config = {
   env: process.env.ENV,
   postgres: {
     host: process.env.POSTGRES_HOST,
-    db: process.env.POSTGRES_DB,
+    db:
+      process.env.ENV === 'test'
+        ? process.env.POSTGRES_TEST_DB
+        : process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
   },

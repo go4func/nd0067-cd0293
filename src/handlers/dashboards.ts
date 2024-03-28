@@ -1,13 +1,13 @@
 import type express from 'express';
 import type { Request, Response } from 'express';
-import type { Product } from '../models/product';
+import type { Dashboard} from '../models/dashboard';
 import { DashboardStore } from '../models/dashboard';
 
 const store: DashboardStore = new DashboardStore();
 
 const fiveMostPopular = async (req: Request, res: Response) => {
   try {
-    const products: Product[] = await store.mostPopularProduct(5);
+    const products: Dashboard[] = await store.mostPopularProduct(5);
     res.status(200).json(products);
   } catch (err) {
     console.error(`get 5 most popular product got error: ${err}`);
