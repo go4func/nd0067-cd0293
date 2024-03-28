@@ -1,6 +1,6 @@
 import type express from 'express';
 import type { Request, Response } from 'express';
-import type { Dashboard} from '../models/dashboard';
+import type { Dashboard } from '../models/dashboard';
 import { DashboardStore } from '../models/dashboard';
 
 const store: DashboardStore = new DashboardStore();

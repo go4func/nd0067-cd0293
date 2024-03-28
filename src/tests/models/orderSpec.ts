@@ -1,6 +1,9 @@
-import { Order, OrderStore } from '../../models/order';
-import { Product, ProductStore } from '../../models/product';
-import { User, UserStore } from '../../models/user';
+import type { Order } from '../../models/order';
+import { OrderStore } from '../../models/order';
+import type { Product } from '../../models/product';
+import { ProductStore } from '../../models/product';
+import type { User } from '../../models/user';
+import { UserStore } from '../../models/user';
 
 const store = new OrderStore();
 

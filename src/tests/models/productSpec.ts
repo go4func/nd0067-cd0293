@@ -1,4 +1,5 @@
-import { Product, ProductFilter, ProductStore } from '../../models/product';
+import type { Product, ProductFilter } from '../../models/product';
+import { ProductStore } from '../../models/product';
 
 const store = new ProductStore();
 
