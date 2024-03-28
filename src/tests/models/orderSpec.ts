@@ -68,4 +68,30 @@ describe('Model: Order', () => {
       expect(result.length).not.toEqual(0);
     });
   });
+  describe('method update', () => {
+    it('should have an update method', async () => {
+      expect(store.update).toBeDefined;
+    });
+    it('should update order', async () => {
+      const order: Order = {
+        id: 1,
+        product_id: 1,
+        user_id: 1,
+        quantity: 1,
+        status: 'complete',
+      };
+      const result: Order = await store.update(order);
+      expect(result.id).toEqual(1);
+      expect(result.status).toEqual('complete');
+    });
+  });
+  describe('method getCompleteOrders', () => {
+    it('should have an getCompleteOrders method', async () => {
+      expect(store.getCompleteOrders).toBeDefined;
+    });
+    it('should return list of complete orders', async () => {
+      const result = await store.getCompleteOrders(1);
+      expect(result.length).not.toEqual(0);
+    });
+  });
 });

@@ -24,4 +24,11 @@ describe('Handler: orders', () => {
       expect(response.text).toEqual('"token is required"');
     });
   });
+  describe('PUT /orders', () => {
+    it('should response with status 401', async () => {
+      const response = await request.put('/orders').send({});
+      expect(response.status).toBe(401);
+      expect(response.text).toEqual('"token is required"');
+    });
+  });
 });
