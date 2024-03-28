@@ -12,7 +12,7 @@ Schemas were already in migrations folder.
 
 1. Up postgres server in default port (:5432), create database, user with information same as in .evn file.
 
-2. Create and put database info in `database.json` file, see `database-example.json`.
+2. Put database info (dev, test) in `database.json` file, or use environment variables.
 
 3. Run cmd `db-migrate up`.
 
