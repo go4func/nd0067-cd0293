@@ -2,7 +2,7 @@ import { app } from '../../server';
 import supertest from 'supertest';
 
 const request = supertest(app);
-describe('Test orders routes', () => {
+describe('Handler: orders', () => {
   describe('GET /orders/active', () => {
     it('should response with status 401', async () => {
       const response = await request.get('/orders/active');

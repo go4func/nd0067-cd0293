@@ -2,7 +2,7 @@ import { app } from '../../server';
 import supertest from 'supertest';
 
 const request = supertest(app);
-describe('Test auth routes', () => {
+describe('Handlers: auth', () => {
   describe('GET /login', () => {
     it('should response with status 400', async () => {
       const response = await request.post('/login');
