@@ -7,7 +7,7 @@ const store = new OrderStore();
 const userStore = new UserStore();
 const productStore = new ProductStore();
 
-fdescribe('Model: Order', () => {
+describe('Model: Order', () => {
   describe('method create', () => {
     it('should have an create method', async () => {
       expect(store.create).toBeDefined;
@@ -34,7 +34,6 @@ fdescribe('Model: Order', () => {
 
       const result: Order = await store.create(order);
 
-      console.log(JSON.stringify(result));
       expect(result.id).toBeDefined;
       expect(result.status).toEqual(order.status);
     });
