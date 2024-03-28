@@ -17,7 +17,7 @@ export class UserStore {
         user.last_name,
         user.password,
       ]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`create user got error: ${err}`);
@@ -29,7 +29,7 @@ export class UserStore {
       const conn = await client.connect();
       const sql = `SELECT id, first_name, last_name FROM users;`;
       const result = await conn.query(sql);
-      conn.release;
+      conn.release();
       return result.rows;
     } catch (err) {
       throw new Error(`index users got error: ${err}`);
@@ -41,7 +41,7 @@ export class UserStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM users WHERE id = $1;`;
       const result = await conn.query(sql, [id]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`show user with id ${id}got error: ${err}`);

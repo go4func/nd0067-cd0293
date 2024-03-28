@@ -16,7 +16,7 @@ export class ProductStore {
       const conn = await client.connect();
       const sql = `INSERT INTO products(name, category) VALUES($1, $2) RETURNING *`;
       const result = await conn.query(sql, [product.name, product.category]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`create product got error: ${err}`);
@@ -34,7 +34,7 @@ export class ProductStore {
       }
 
       const result = await conn.query(sql, values);
-      conn.release;
+      conn.release();
       return result.rows;
     } catch (err) {
       throw new Error(`index products got error: ${err}`);
@@ -46,7 +46,7 @@ export class ProductStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM products WHERE id = $1;`;
       const result = await conn.query(sql, [id]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`show product with id ${id}got error: ${err}`);

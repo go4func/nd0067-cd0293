@@ -14,7 +14,7 @@ export class OrderStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM orders WHERE user_id = $1 AND status = 'active';`;
       const result = await conn.query(sql, [user_id]);
-      conn.release;
+      conn.release();
       return result.rows;
     } catch (err) {
       throw new Error(`index orders got error: ${err}`);
@@ -25,7 +25,7 @@ export class OrderStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM orders WHERE user_id = $1 AND status = 'complete';`;
       const result = await conn.query(sql, [user_id]);
-      conn.release;
+      conn.release();
       return result.rows;
     } catch (err) {
       throw new Error(`index orders got error: ${err}`);
@@ -37,7 +37,7 @@ export class OrderStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM orders;`;
       const result = await conn.query(sql);
-      conn.release;
+      conn.release();
       return result.rows;
     } catch (err) {
       throw new Error(`index orders got error: ${err}`);
@@ -49,7 +49,7 @@ export class OrderStore {
       const conn = await client.connect();
       const sql = `SELECT * FROM orders WHERE id = $1;`;
       const result = await conn.query(sql, [id]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`show order with id ${id}got error: ${err}`);
@@ -66,7 +66,7 @@ export class OrderStore {
         order.quantity,
         order.status,
       ]);
-      conn.release;
+      conn.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(`create order got error: ${err}`);
