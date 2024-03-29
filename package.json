@@ -5,8 +5,12 @@
   "main": "server.ts",
   "scripts": {
     "start": "nodemon",
-    "test": "ENV=test npx tsc && db-migrate --env test up && ENV=test jasmine && db-migrate --env test reset",
-    "build": "npx tsc",
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npx tsc",
+    "db-up": "db-migrate --env dev up",
+    "db-reset": "db-migrate --env dev reset",
+    "db-test-reset": "db-migrate --env test reset",
+    "test": "npm run build && db-migrate --env test up && ENV=test jasmine && db-migrate --env test reset",
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "npx eslint . --fix"
   },

@@ -1,8 +1,12 @@
 import { DashboardStore } from '../../models/dashboard';
-import { Order, OrderStore } from '../../models/order';
-import { OrderProduct, OrderProductStore } from '../../models/orderProducts';
-import { Product, ProductStore } from '../../models/product';
-import { User, UserStore } from '../../models/user';
+import type { Order} from '../../models/order';
+import { OrderStore } from '../../models/order';
+import type { OrderProduct} from '../../models/orderProducts';
+import { OrderProductStore } from '../../models/orderProducts';
+import type { Product} from '../../models/product';
+import { ProductStore } from '../../models/product';
+import type { User} from '../../models/user';
+import { UserStore } from '../../models/user';
 
 const store = new DashboardStore();
 const orderStore = new OrderStore();
@@ -10,7 +14,7 @@ const userStore = new UserStore();
 const productStore = new ProductStore();
 const orderProductStore = new OrderProductStore();
 
-describe('Model: dashboard', () => {
+describe('Model: Dashboard', () => {
   describe('method mostPopularProduct', () => {
     it('should have an mostPopularProduct method', async () => {
       expect(store.mostPopularProduct).toBeDefined;

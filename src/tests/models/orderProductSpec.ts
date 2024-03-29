@@ -1,6 +1,7 @@
 import type { Order } from '../../models/order';
 import { OrderStore } from '../../models/order';
-import { OrderProduct, OrderProductStore } from '../../models/orderProducts';
+import type { OrderProduct} from '../../models/orderProducts';
+import { OrderProductStore } from '../../models/orderProducts';
 import type { Product } from '../../models/product';
 import { ProductStore } from '../../models/product';
 import type { User } from '../../models/user';

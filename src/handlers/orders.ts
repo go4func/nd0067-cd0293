@@ -3,9 +3,10 @@ import type { Request, Response } from 'express';
 import type { Order } from '../models/order';
 import { OrderStore } from '../models/order';
 import auth from './authentications';
-import {
+import type {
   OrderProduct,
-  OrderProductDetail,
+  OrderProductDetail} from '../models/orderProducts';
+import {
   OrderProductStore,
 } from '../models/orderProducts';
 
@@ -100,7 +101,7 @@ const activeOrders = async (req: Request, res: Response) => {
       authUser.id,
       'active',
     );
-    let result: {
+    const result: {
       products: OrderProductDetail[];
     }[] = [];
     for await (const order of orders) {
@@ -126,7 +127,7 @@ const completeOrders = async (req: Request, res: Response) => {
       authUser.id,
       'complete',
     );
-    let result: {
+    const result: {
       products: OrderProductDetail[];
     }[] = [];
     for await (const order of orders) {

@@ -1,27 +1,42 @@
+import type { User } from '../../models/user';
 import { app } from '../../server';
 import supertest from 'supertest';
 
 const request = supertest(app);
 describe('Handler: users', () => {
-  describe('GET /users', () => {
-    it('should response with status 401', async () => {
-      const response = await request.get('/users');
-      expect(response.status).toBe(401);
-      expect(response.text).toEqual('"token is required"');
-    });
-  });
-  describe('GET /users/:id', () => {
-    it('should response with status 401', async () => {
-      const response = await request.get('/users/1');
-      expect(response.status).toBe(401);
-      expect(response.text).toEqual('"token is required"');
-    });
-  });
+  const user: User = {
+    first_name: 'fist_name',
+    last_name: 'last_name',
+    password: 'password',
+  };
+
   describe('POST /users', () => {
-    it('should response with status 400', async () => {
-      const response = await request.post('/users').send({});
-      expect(response.status).toBe(400);
-      expect(response.text).toEqual('"invalid request body"');
+    it('should response with status 200', async () => {
+      await request.post('/users').send(user).expect(200);
+    });
+  });
+
+  describe('GET /users', () => {
+    it('should response with status 200', async () => {
+      const response = await request
+        .post('/login')
+        .send({ id: 1, password: user.password });
+      await request
+        .get('/users')
+        .set('Authorization', `Bearer ${response.body.token}`)
+        .expect(200);
+    });
+  });
+
+  describe('GET /users/:id', () => {
+    it('should response with status 200', async () => {
+      const response = await request
+        .post('/login')
+        .send({ id: 1, password: user.password });
+      await request
+        .get('/users/1')
+        .set('Authorization', `Bearer ${response.body.token}`)
+        .expect(200);
     });
   });
 });

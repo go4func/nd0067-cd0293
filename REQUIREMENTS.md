@@ -28,7 +28,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create order [token required]: `/orders` [POST]
 - Add order product [token required]: `/orders/:id/products` [PUT]
 - Update order [token required]: `/orders` [PUT]
-- Current Order by user (args: user id)[token required]: `/orders/active` [GET]
+- Current Orders by user (args: user id)[token required]: `/orders/active` [GET]
 - Completed Orders by user (args: user id)[token required]: `/orders/complete` [GET]
 
 #### Dashboard
