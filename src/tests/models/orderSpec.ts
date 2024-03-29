@@ -1,14 +1,10 @@
 import type { Order } from '../../models/order';
 import { OrderStore } from '../../models/order';
-import type { Product } from '../../models/product';
-import { ProductStore } from '../../models/product';
 import type { User } from '../../models/user';
 import { UserStore } from '../../models/user';
 
 const store = new OrderStore();
-
 const userStore = new UserStore();
-const productStore = new ProductStore();
 
 describe('Model: Order', () => {
   describe('method create', () => {
@@ -16,11 +12,6 @@ describe('Model: Order', () => {
       expect(store.create).toBeDefined;
     });
     it('should return created order', async () => {
-      const product: Product = {
-        name: 'macbook pro 14',
-        category: 'laptop',
-      };
-      await productStore.create(product);
       const user: User = {
         first_name: 'fist_name',
         last_name: 'last_name',
@@ -29,12 +20,9 @@ describe('Model: Order', () => {
       await userStore.create(user);
 
       const order: Order = {
-        product_id: 1,
         user_id: 1,
-        quantity: 1,
         status: 'active',
       };
-
       const result: Order = await store.create(order);
 
       expect(result.id).toBeDefined;
@@ -75,9 +63,7 @@ describe('Model: Order', () => {
     it('should update order', async () => {
       const order: Order = {
         id: 1,
-        product_id: 1,
         user_id: 1,
-        quantity: 1,
         status: 'complete',
       };
       const result: Order = await store.update(order);
