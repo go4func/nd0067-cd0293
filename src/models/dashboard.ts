@@ -2,16 +2,16 @@ import client from '../database';
 
 export type Dashboard = {
   product_id: number;
-  product_name: string;
+  name: string;
   category: string;
-  orders_count: number;
+  sum: number;
 };
 
 export class DashboardStore {
   async mostPopularProduct(limit: number): Promise<Dashboard[]> {
     try {
       const conn = await client.connect();
-      const sql: string = `SELECT p.id as product_id, p.name as product_name, p.category, sum(o.quantity) as orders_count FROM products p INNER JOIN orders o ON p.id = o.product_id GROUP BY p.id ORDER BY orders_count DESC limit $1;`;
+      const sql: string = `SELECT p.id as product_id, p.name, p.category, SUM(op.quantity) as sum from products p INNER JOIN order_products op ON op.product_id = p.id GROUP BY p.id ORDER BY sum DESC LIMIT $1`;
 
       const result = await conn.query(sql, [limit]);
       conn.release();

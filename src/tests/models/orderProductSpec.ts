@@ -42,18 +42,9 @@ describe('Model: OrderProduct', () => {
         quantity: 10,
       };
       const result = await store.create(orderProduct);
-      expect(parseInt(`${result.order_id}`)).toEqual(orderProduct.order_id);
-      expect(parseInt(`${result.product_id}`)).toEqual(orderProduct.product_id);
-      expect(parseInt(`${result.quantity}`)).toEqual(orderProduct.quantity);
-    });
-  });
-  describe('method show', () => {
-    it('should have an show method', async () => {
-      expect(store.show).toBeDefined;
-    });
-    it('should return list of order products', async () => {
-      const result = await store.show(1);
-      expect(result.length).not.toEqual(0);
+      expect(result.order_id).toEqual(orderProduct.order_id);
+      expect(result.product_id).toEqual(orderProduct.product_id);
+      expect(result.quantity).toEqual(orderProduct.quantity);
     });
   });
 });

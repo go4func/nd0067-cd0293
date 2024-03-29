@@ -6,12 +6,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 
-#### Products
+#### Auth
 
-- Create [token required]: `/products` [POST]
-- Index: `/products` [GET]
-- Show: `/products/:id` [GET]
-- Products by category (args: product category): `/products?category={category}` [GET]
+- Login: `/login` [POST]
 
 #### Users
 
@@ -19,30 +16,26 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index [token required]: `/users` [GET]
 - Show [token required]: `/users/:id` [GET]
 
+#### Products
+
+- Create [token required]: `/products` [POST]
+- Index: `/products` [GET]
+- Show: `/products/:id` [GET]
+- Products by category (args: product category): `/products?category={category}` [GET]
+
 #### Orders
 
-- Create [token required]: `/orders` [POST]
-- Update [token required]: `/orders` [PUT]
-- Current Order by user (args: user id)[token required]: `/orders?user_id={user_id}&status=active` [GET]
-- Completed Orders by user (args: user id)[token required]: `/orders?user_id={user_id}&status=complete` [GET]
+- Create order [token required]: `/orders` [POST]
+- Add order product [token required]: `/orders/:id/products` [PUT]
+- Update order [token required]: `/orders` [PUT]
+- Current Order by user (args: user id)[token required]: `/orders/active` [GET]
+- Completed Orders by user (args: user id)[token required]: `/orders/complete` [GET]
 
 #### Dashboard
 
 - Top 5 most popular products: `/five-most-popular` [GET]
 
-#### Auth
-
-- Login: `/login` [POST]
-
 ## Data Shapes
-
-#### Product
-
-table products:
-
-- id serial primary key
-- name varchar(100)
-- category varchar(50)
 
 #### User
 
@@ -53,12 +46,26 @@ table users:
 - last_name varchar(50)
 - password varchar(100)
 
+#### Product
+
+table products:
+
+- id serial primary key
+- name varchar(100)
+- category varchar(50)
+
 #### Orders
 
 table orders:
 
 - id serial primary key,
-- product_id bigint references products(id),
-- user_id bigint references users(id),
-- quantity bigint,
+- user_id int references users(id),
 - status varchar(10)
+
+#### Order Products
+
+table order_products:
+
+- order_id int references orders(id),
+- product_id int references products(id),
+- quantity int

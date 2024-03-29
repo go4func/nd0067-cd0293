@@ -59,27 +59,20 @@ export class OrderStore {
     }
   }
 
-  async getActiveOrders(userId: number): Promise<Order[]> {
+  async getUserOrdersByStatus(
+    userId: number,
+    status: string,
+  ): Promise<Order[]> {
     try {
       const conn = await client.connect();
-      const sql = `SELECT * FROM orders WHERE user_id = $1 AND status = 'active';`;
-      const result = await conn.query(sql, [userId]);
+      const sql = `SELECT * FROM orders WHERE user_id = $1 AND status = $2;`;
+      const result = await conn.query(sql, [userId, status]);
       conn.release();
       return result.rows;
     } catch (err) {
-      throw new Error(`index orders got error: ${err}`);
-    }
-  }
-
-  async getCompleteOrders(userId: number): Promise<Order[]> {
-    try {
-      const conn = await client.connect();
-      const sql = `SELECT * FROM orders WHERE user_id = $1 AND status = 'complete';`;
-      const result = await conn.query(sql, [userId]);
-      conn.release();
-      return result.rows;
-    } catch (err) {
-      throw new Error(`index orders got error: ${err}`);
+      throw new Error(
+        `get order for user ${userId} with status ${status} got error: ${err}`,
+      );
     }
   }
 }

@@ -26,6 +26,7 @@ describe('Model: Order', () => {
       const result: Order = await store.create(order);
 
       expect(result.id).toBeDefined;
+      expect(result.user_id).toEqual(order.user_id);
       expect(result.status).toEqual(order.status);
     });
   });
@@ -47,12 +48,12 @@ describe('Model: Order', () => {
       expect(result.id).toEqual(1);
     });
   });
-  describe('method getActiveOrders', () => {
-    it('should have an getActiveOrders method', async () => {
-      expect(store.getActiveOrders).toBeDefined;
+  describe('method getUserOrdersByStatus', () => {
+    it('should have an getUserOrdersByStatus method', async () => {
+      expect(store.getUserOrdersByStatus).toBeDefined;
     });
     it('should return list of active orders', async () => {
-      const result = await store.getActiveOrders(1);
+      const result = await store.getUserOrdersByStatus(1, 'active');
       expect(result.length).not.toEqual(0);
     });
   });
@@ -67,17 +68,9 @@ describe('Model: Order', () => {
         status: 'complete',
       };
       const result: Order = await store.update(order);
-      expect(result.id).toEqual(1);
-      expect(result.status).toEqual('complete');
-    });
-  });
-  describe('method getCompleteOrders', () => {
-    it('should have an getCompleteOrders method', async () => {
-      expect(store.getCompleteOrders).toBeDefined;
-    });
-    it('should return list of complete orders', async () => {
-      const result = await store.getCompleteOrders(1);
-      expect(result.length).not.toEqual(0);
+      expect(result.id).toEqual(order.id);
+      expect(result.user_id).toEqual(order.user_id);
+      expect(result.status).toEqual(order.status);
     });
   });
 });

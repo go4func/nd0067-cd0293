@@ -1,5 +1,5 @@
 create table order_products(
-    order_id bigint references orders(id),
-    product_id bigint references products(id),
-    quantity bigint
+    order_id int references orders(id),
+    product_id int references products(id),
+    quantity int
 );

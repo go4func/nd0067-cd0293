@@ -6,6 +6,13 @@ export type OrderProduct = {
   quantity: number;
 };
 
+export type OrderProductDetail = {
+  product_id: number;
+  name: string;
+  category: string;
+  quantity: number;
+};
+
 export class OrderProductStore {
   async create(order: OrderProduct): Promise<OrderProduct> {
     try {
@@ -23,17 +30,15 @@ export class OrderProductStore {
     }
   }
 
-  async show(orderId: number): Promise<OrderProduct[]> {
+  async getOrderProducts(orderId: number): Promise<OrderProductDetail[]> {
     try {
       const conn = await client.connect();
-      const sql = `SELECT * FROM order_products WHERE order_id = $1;`;
+      const sql = `SELECT product_id, name, category, quantity FROM order_products op INNER JOIN products p ON op.product_id = p.id WHERE op.order_id = $1`;
       const result = await conn.query(sql, [orderId]);
       conn.release();
       return result.rows;
     } catch (err) {
-      throw new Error(
-        `show order product with id ${orderId} got error: ${err}`,
-      );
+      throw new Error(`create order product got error: ${err}`);
     }
   }
 }
