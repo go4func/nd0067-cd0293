@@ -33,3 +33,5 @@ Please run `npm ci --verbose` first to install required package
 ## API
 
 For API that requires token: user need to login to get the token first, then set it in Authorization header of required API.
+
+Example is in `./postman`

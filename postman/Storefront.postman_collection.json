@@ -75,8 +75,53 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5"
+									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const {token} = pm.response.json();",
+									"pm.collectionVariables.set(\"login-token\", token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n    \"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
 							]
 						}
 					},
@@ -94,7 +139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"new item\",\n    \"category\":\"uncategory\"\n}",
+							"raw": "{\n    \"name\":\"macbook pro\",\n    \"category\":\"laptop\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +204,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "13"
+									"value": "1"
 								}
 							]
 						}
@@ -178,7 +223,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\":11,\n    \"quantity\":3\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,13 +245,13 @@
 					"response": []
 				},
 				{
-					"name": "update",
+					"name": "add order product",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\":18,\n    \"product_id\":11,\n    \"quantity\":3,\n    \"status\":\"complete\"\n}",
+							"raw": "{\n    \"product_id\":7,\n    \"quantity\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -214,14 +259,22 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/orders",
+							"raw": "http://localhost:3000/orders/:id/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"orders"
+								"orders",
+								":id",
+								"products"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -248,6 +301,34 @@
 					"response": []
 				},
 				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n    \"status\":\"complete\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "complete orders",
 					"request": {
 						"method": "GET",
@@ -262,51 +343,6 @@
 							"path": [
 								"orders",
 								"complete"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const {token} = pm.response.json();",
-									"pm.collectionVariables.set(\"login-token\", token)"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\":5,\n    \"password\":\"password\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"login"
 							]
 						}
 					},
